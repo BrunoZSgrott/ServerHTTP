@@ -52,7 +52,7 @@ public class Connection implements Runnable {
             fileRequested = parse.nextToken().toLowerCase();
 
             if (method.equals("GET") || method.equals("HEAD")) {
-                if (fileRequested.equals("") || fileRequested.equals("/")) {
+                if (fileRequested.equals("index.html") || fileRequested.equals("") || fileRequested.equals("/")) {
                     fileRequested += Paths.DEFAULT_FILE.toString();
                 }
                 strategy = new ConnectionStrategyFileFound(out, dataOut, fileRequested);
