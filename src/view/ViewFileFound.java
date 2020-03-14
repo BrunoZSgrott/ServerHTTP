@@ -18,7 +18,7 @@ public class ViewFileFound extends ViewBase {
 
     @Override
     public String getContentType() {
-        return getFile().getContentType();
+        return getFile().getMimeType();
     }
 
     @Override

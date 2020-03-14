@@ -19,7 +19,7 @@ public class ViewNotImplemented extends ViewBase {
 
     @Override
     public String getContentType() {
-        return "text/html";
+        return getFile().getMimeType();
     }
 
     @Override

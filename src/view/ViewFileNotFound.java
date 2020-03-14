@@ -35,7 +35,7 @@ public class ViewFileNotFound extends ViewFileFound {
     }
 
     public String getContentType() {
-        return "text/html";
+        return getFile().getMimeType();
     }
 
     public int getFileLength() {

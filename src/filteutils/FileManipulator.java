@@ -9,7 +9,9 @@ import connection.Paths;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.FileNameMap;
 import java.net.URI;
+import java.net.URLConnection;
 
 /**
  *
@@ -63,5 +65,10 @@ public class FileManipulator extends File {
         } else {
             return "text/plain";
         }
+    }
+
+    public String getMimeType() {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        return fileNameMap.getContentTypeFor(this.getName());
     }
 }
