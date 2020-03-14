@@ -19,6 +19,9 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.StringTokenizer;
 import server.ServerController;
+import strategy.MethodStrategy;
+import strategy.MethodStrategyGet;
+import strategy.MethodStrategyPost;
 
 /**
  *
@@ -40,31 +43,35 @@ public class Connection implements Runnable {
     public void run() {
         ConnectionStrategy strategy = null;
         String method = null;
+        MethodStrategy methodStrategy = null;
         try {
             in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             out = new PrintWriter(connection.getOutputStream());
             dataOut = new BufferedOutputStream(connection.getOutputStream());
-
+            in.mark(1);
             String input = in.readLine();
             StringTokenizer parse = new StringTokenizer(input);
             method = parse.nextToken().toUpperCase();
             strategy = new ConnectionStrategyNotImplemented(out, dataOut, method);
             fileRequested = parse.nextToken().toLowerCase();
 
-            if (method.equals("GET") || method.equals("HEAD")) {
-                if (fileRequested.equals("index.html") || fileRequested.equals("") || fileRequested.equals("/")) {
-                    fileRequested += Paths.DEFAULT_FILE.toString();
-                }
-                strategy = new ConnectionStrategyFileFound(out, dataOut, fileRequested);
+            if (fileRequested.equals("index.html") || fileRequested.equals("") || fileRequested.equals("/")) {
+                fileRequested += Paths.DEFAULT_FILE.toString();
             }
+            if (method.equals("GET") || method.equals("HEAD")) {
+                methodStrategy = new MethodStrategyGet(fileRequested, in);
+            } else if (method.equals("POST")) {
+                methodStrategy = new MethodStrategyPost(fileRequested, in);
+            }
+            strategy = new ConnectionStrategyFileFound(out, dataOut, methodStrategy);
+            methodStrategy.getData();
 
         } catch (FileNotFoundException fnfe) {
-            strategy = new ConnectionStrategyFileNotFound(out, dataOut, fileRequested);
+            strategy = new ConnectionStrategyFileNotFound(out, dataOut, methodStrategy);
         } catch (IOException ioe) {
             System.err.println("Server error : " + ioe);
         } finally {
             try {
-                strategy.setMethod(method);
                 strategy.send();
                 in.close();
                 out.close();

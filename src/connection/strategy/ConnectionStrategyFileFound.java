@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import server.ServerController;
+import strategy.MethodStrategy;
 import view.ViewBase;
 import view.ViewFileFound;
 
@@ -14,17 +14,18 @@ import view.ViewFileFound;
  */
 public class ConnectionStrategyFileFound extends ConnectionStrategy {
 
-    protected String fileRequested;
+    protected String dados;
+    protected MethodStrategy strategy;
 
-    public ConnectionStrategyFileFound(PrintWriter writer, OutputStream output, String fileRequested) throws FileNotFoundException, IOException {
+    public ConnectionStrategyFileFound(PrintWriter writer, OutputStream output, MethodStrategy strategy) throws FileNotFoundException, IOException {
         super(writer, output);
-        this.fileRequested = fileRequested;
+        this.strategy = strategy;
         getView().getFileData();
     }
 
     @Override
     protected ViewBase createView() {
-        return new ViewFileFound(fileRequested);
+        return new ViewFileFound(strategy);
     }
 
 }

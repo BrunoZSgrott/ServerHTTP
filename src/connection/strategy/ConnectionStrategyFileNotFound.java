@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import server.ServerController;
+import strategy.MethodStrategy;
 import view.ViewBase;
 import view.ViewFileNotFound;
 
@@ -14,16 +15,16 @@ import view.ViewFileNotFound;
  */
 public class ConnectionStrategyFileNotFound extends ConnectionStrategy {
 
-    private String fileRequested;
+    private MethodStrategy methodStrategy;
 
-    public ConnectionStrategyFileNotFound(PrintWriter writer, OutputStream output, String fileRequested) {
+    public ConnectionStrategyFileNotFound(PrintWriter writer, OutputStream output, MethodStrategy methodStrategy) {
         super(writer, output);
-        this.fileRequested = fileRequested;
+        this.methodStrategy = methodStrategy;
     }
 
     @Override
     protected ViewBase createView() {
-        return new ViewFileNotFound(fileRequested);
+        return new ViewFileNotFound(methodStrategy);
     }
 
 }

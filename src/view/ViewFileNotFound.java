@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import main.Cache;
 import server.ServerController;
+import strategy.MethodStrategy;
 
 /**
  *
@@ -20,8 +21,8 @@ import server.ServerController;
  */
 public class ViewFileNotFound extends ViewFileFound {
 
-    public ViewFileNotFound(String fileRequested) {
-        super(fileRequested);
+    public ViewFileNotFound(MethodStrategy strat) {
+        super(strat);
     }
 
     @Override

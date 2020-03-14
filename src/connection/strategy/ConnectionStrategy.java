@@ -17,8 +17,6 @@ public abstract class ConnectionStrategy {
     private PrintWriter writer;
     private ViewBase file;
 
-    private String method;
-
     public ConnectionStrategy(PrintWriter writer, OutputStream output) {
         this.writer = writer;
         this.output = output;
@@ -51,14 +49,6 @@ public abstract class ConnectionStrategy {
 
     public String getContentType() {
         return getView().getContentType();
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getMethod() {
-        return method;
     }
 
     abstract protected ViewBase createView();

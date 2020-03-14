@@ -3,6 +3,7 @@ package view;
 import filteutils.FileManipulator;
 import java.io.IOException;
 import main.Cache;
+import strategy.MethodStrategy;
 
 /**
  *
@@ -12,8 +13,8 @@ public class ViewFileFound extends ViewBase {
 
     protected String fileRequested;
 
-    public ViewFileFound(String fileRequested) {
-        this.fileRequested = fileRequested;
+    public ViewFileFound(MethodStrategy strat) {
+        this.fileRequested = strat.getFileRequested();
     }
 
     @Override
