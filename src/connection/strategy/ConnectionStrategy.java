@@ -1,10 +1,8 @@
 package connection.strategy;
 
-import filteutils.FileManipulator;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import server.ServerController;
 import view.ViewBase;
 
 /**

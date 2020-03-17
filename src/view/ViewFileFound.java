@@ -1,8 +1,9 @@
 package view;
 
-import filteutils.FileManipulator;
+import utils.Paths;
+import utils.FileManipulator;
 import java.io.IOException;
-import main.Cache;
+import utils.Cache;
 import strategy.MethodStrategy;
 
 /**
@@ -12,9 +13,20 @@ import strategy.MethodStrategy;
 public class ViewFileFound extends ViewBase {
 
     protected String fileRequested;
+    protected int statusCode;
+    protected String statusMessage;
 
     public ViewFileFound(MethodStrategy strat) {
-        this.fileRequested = strat.getFileRequested();
+        String fr = strat.getFileRequested();
+        if(fr.equals(Paths.BAD_REQUEST.toString())){
+            this.fileRequested = Paths.BAD_REQUEST.toString();
+            this.statusCode = 400;
+            this.statusMessage = "Bad Request";
+        } else {
+            this.fileRequested = fr;
+            this.statusCode = 200;
+            this.statusMessage = "Ok";
+        }
     }
 
     @Override
@@ -34,12 +46,12 @@ public class ViewFileFound extends ViewBase {
 
     @Override
     protected String getStatusMessage() {
-        return "OK";
+        return this.statusMessage;
     }
 
     @Override
     protected int getStatusCode() {
-        return 200;
+        return this.statusCode;
     }
 
     @Override

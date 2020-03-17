@@ -20,7 +20,6 @@ public class ConnectionStrategyFileFound extends ConnectionStrategy {
     public ConnectionStrategyFileFound(PrintWriter writer, OutputStream output, MethodStrategy strategy) throws FileNotFoundException, IOException {
         super(writer, output);
         this.strategy = strategy;
-        getView().getFileData();
     }
 
     @Override

@@ -2,7 +2,6 @@ package connection.strategy;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import server.ServerController;
 import view.ViewBase;
 import view.ViewNotImplemented;
 

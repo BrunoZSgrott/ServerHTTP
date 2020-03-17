@@ -1,10 +1,7 @@
 package connection.strategy;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import server.ServerController;
 import strategy.MethodStrategy;
 import view.ViewBase;
 import view.ViewFileNotFound;

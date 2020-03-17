@@ -1,9 +1,9 @@
 package view;
 
-import connection.Paths;
-import filteutils.FileManipulator;
+import utils.Paths;
+import utils.FileManipulator;
 import java.io.IOException;
-import main.Cache;
+import utils.Cache;
 
 /**
  *

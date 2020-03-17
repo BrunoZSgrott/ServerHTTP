@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package connection;
-
-import java.io.File;
+package utils;
 
 /**
  *
@@ -16,7 +14,9 @@ public enum Paths {
     DEFAULT_FILE("index.html"),
     WEB_ROOT("public_html/"),
     FILE_NOT_FOUND("404.html"),
-    METHOD_NOT_SUPPORTED("not_supported.html");
+    METHOD_NOT_SUPPORTED("not_supported.html"),
+    BAD_REQUEST("bad_request.html"),
+    INFO_PESSOA("pessoa/pessoa.txt");
 
     private String path;
 

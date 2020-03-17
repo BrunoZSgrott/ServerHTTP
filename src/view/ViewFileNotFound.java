@@ -5,14 +5,10 @@
  */
 package view;
 
-import connection.Paths;
-import filteutils.FileManipulator;
+import utils.Paths;
+import utils.FileManipulator;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Date;
-import main.Cache;
-import server.ServerController;
+import utils.Cache;
 import strategy.MethodStrategy;
 
 /**

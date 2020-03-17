@@ -1,9 +1,12 @@
 package strategy;
 
+import utils.Paths;
+import utils.FileManipulator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import utils.Cache;
 
 /**
  *
@@ -24,7 +27,11 @@ public class MethodStrategyPost extends MethodStrategy {
         if (this.getUrl().indexOf("?") != -1) {
             url = this.getUrl().substring(0, this.getUrl().indexOf("?"));
         }
-        return url;
+        FileManipulator file = new FileManipulator(Cache.getInstance().getRootFile(), url);
+        if(file.exists()){
+            return url;
+        }
+        return Paths.BAD_REQUEST.toString();
     }
 
     @Override
@@ -43,8 +50,10 @@ public class MethodStrategyPost extends MethodStrategy {
             for (String str : array) {
                 String[] dados = str.split("=");
                 this.dataKey.add(dados[0]);
-                this.data.add(dados[1]);
+                this.data.add(dados[1].replace('+', ' '));
             }
+            FileManipulator file = new FileManipulator(Cache.getInstance().getRootFile(), Paths.INFO_PESSOA.toString());
+            file.write(this.data.get(0) + ";" + this.data.get(1) + "\n");
         } catch (Exception ex) {
         }
     }

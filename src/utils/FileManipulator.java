@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filteutils;
+package utils;
 
-import connection.Paths;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.FileNameMap;
 import java.net.URI;
@@ -28,6 +29,7 @@ public class FileManipulator extends File {
 
     public FileManipulator(String pathname) {
         super(pathname);
+        this.path = pathname;
     }
 
     public FileManipulator(String parent, String child) {
@@ -59,16 +61,26 @@ public class FileManipulator extends File {
         return fileData;
     }
 
-    public String getContentType() {
-        if (path.endsWith(".htm") || path.endsWith(".html")) {
-            return "text/html";
-        } else {
-            return "text/plain";
-        }
-    }
-
     public String getMimeType() {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         return fileNameMap.getContentTypeFor(this.getName());
+    }
+
+    public void write(String str) {
+        try {
+            FileWriter fw = null;
+            if (!this.exists()) {
+                this.createNewFile();
+                fw = new FileWriter(this);
+            } else {
+                fw = new FileWriter(this, true);
+            }
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(str);
+            bw.close();
+            fw.close();
+        } catch (Exception ex) {
+            boolean x = true;
+        }
     }
 }

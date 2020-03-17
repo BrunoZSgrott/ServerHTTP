@@ -1,22 +1,17 @@
 package connection;
 
+import utils.Paths;
 import connection.strategy.ConnectionStrategy;
 import connection.strategy.ConnectionStrategyFileFound;
 import connection.strategy.ConnectionStrategyFileNotFound;
 import connection.strategy.ConnectionStrategyNotImplemented;
-import main.Cache;
-import filteutils.FileManipulator;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Date;
 import java.util.StringTokenizer;
 import server.ServerController;
 import strategy.MethodStrategy;
